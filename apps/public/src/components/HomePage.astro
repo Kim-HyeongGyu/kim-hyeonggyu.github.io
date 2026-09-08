@@ -1,0 +1,54 @@
+---
+import PendingContent from "./PendingContent.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { copy, type Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const common = copy[locale];
+const content = common.home;
+---
+
+<SiteLayout locale={locale} routeKey="home" title={content.title} description={content.description}>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">{content.heroEyebrow}</p>
+        <h1>{content.heroTitle}</h1>
+        <p class="hero-lede">{content.heroLede}</p>
+      </div>
+      <aside class="hero-note" aria-label={content.statusLabel}>
+        <strong>{content.statusTitle}</strong>
+        <p>{content.statusBody}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="public-sections">
+    <div class="shell">
+      <div class="section-heading">
+        <div><p class="eyebrow">{content.recordEyebrow}</p><h2 id="public-sections">{content.recordTitle}</h2></div>
+        <p>{content.recordBody}</p>
+      </div>
+      <div class="card-grid">
+        {content.cards.map((card) => <PendingContent {...card} label={common.pendingLabel} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="private-boundary">
+    <div class="shell bridge">
+      <div>
+        <p class="eyebrow">{content.privateEyebrow}</p>
+        <h2 id="private-boundary">{content.privateTitle}</h2>
+        <p>{content.privateBody}</p>
+      </div>
+      <ul class="boundary-list">
+        {content.boundaries.map((boundary, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{boundary}</li>)}
+      </ul>
+    </div>
+  </section>
+</SiteLayout>

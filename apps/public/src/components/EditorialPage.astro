@@ -1,0 +1,19 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import { copy, type Locale, type RouteKey } from "../i18n";
+
+interface Props {
+  locale: Locale;
+  routeKey: Exclude<RouteKey, "home">;
+}
+
+const { locale, routeKey } = Astro.props;
+const content = copy[locale][routeKey];
+---
+
+<SiteLayout locale={locale} routeKey={routeKey} title={content.title} description={content.description}>
+  <section class="page-hero">
+    <div class="shell"><p class="eyebrow">{content.eyebrow}</p><h1>{content.heading}</h1><p>{content.intro}</p></div>
+  </section>
+  <div class="shell empty-editorial"><h2>{content.emptyTitle}</h2><p>{content.emptyBody}</p></div>
+</SiteLayout>

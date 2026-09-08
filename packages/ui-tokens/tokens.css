@@ -1,0 +1,64 @@
+/* Pretendard v1.3.9, Copyright Kil Hyung-jin; SIL OFL 1.1 in fonts/OFL.txt. */
+@font-face {
+  font-family: "Pretendard Variable";
+  src: url("./fonts/PretendardVariable.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 45 920;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light;
+  --color-canvas: #f4f1e8;
+  --color-surface: #fffdf7;
+  --color-surface-muted: #ebe8de;
+  --color-ink: #17212b;
+  --color-ink-muted: #56616a;
+  --color-navy: #102b3a;
+  --color-navy-soft: #1b4050;
+  --color-teal: #147d78;
+  --color-teal-dark: #0c5d59;
+  --color-sage: #49755b;
+  --color-ochre: #875515;
+  --color-brick: #9b4038;
+  --color-border: #cbc8bd;
+  --color-focus: #006e8a;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-editorial: var(--font-sans);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Pretendard Variable", monospace;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6.5rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.5rem;
+  --border: 1px solid var(--color-border);
+  --shadow-soft: 0 18px 50px rgb(16 43 58 / 0.08);
+  --measure: 70ch;
+  --public-shell: 70rem;
+  --dashboard-shell: 77.5rem;
+  --transition-fast: 160ms ease;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-sans); line-height: 1.6; text-rendering: optimizeLegibility; }
+body { margin: 0; }
+h1, h2, h3 { word-break: keep-all; overflow-wrap: anywhere; }
+button, input, select { font: inherit; }
+a { color: var(--color-teal-dark); text-underline-offset: 0.2em; }
+:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+::selection { background: #bcded8; color: var(--color-navy); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+@media (forced-colors: active) {
+  :focus-visible { outline-color: Highlight; }
+}
