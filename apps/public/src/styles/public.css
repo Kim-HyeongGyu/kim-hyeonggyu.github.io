@@ -1,22 +1,8 @@
 /* Public site only; shared tokens stay light for the dashboard.
    Text-first academic page (owner request, 2026-10-18): one fluid column (40–56rem), one typeface, plain headings,
-   underlined links, no badges or gradients; the only pictures are the portrait and the Research schematics. Dark is the
-   default; light only by the header button. */
+   underlined links, no badges or gradients; the only pictures are the portrait and the Research schematics. Light is the
+   default (owner request, 2026-10-19); dark only by the header button. */
 :root {
-  color-scheme: dark;
-  --color-canvas: #030712;
-  --color-ink: #d4d7dd;
-  --color-strong: #f3f4f6;
-  --color-ink-muted: #9ca3af;
-  --color-link: #93c5fd;
-  --color-focus: #93c5fd;
-  --selection-bg: #1e3a8a;
-  --selection-ink: #f9fafb;
-  --color-map-land: #1a2231;
-  --color-map-line: #374151;
-}
-
-:root[data-theme="light"] {
   color-scheme: light;
   --color-canvas: #ffffff;
   --color-ink: #24292f;
@@ -28,6 +14,20 @@
   --selection-ink: #0d1117;
   --color-map-land: #e6e9ee;
   --color-map-line: #c3c9d1;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-canvas: #030712;
+  --color-ink: #d4d7dd;
+  --color-strong: #f3f4f6;
+  --color-ink-muted: #9ca3af;
+  --color-link: #93c5fd;
+  --color-focus: #93c5fd;
+  --selection-bg: #1e3a8a;
+  --selection-ink: #f9fafb;
+  --color-map-land: #1a2231;
+  --color-map-line: #374151;
 }
 ::selection { background: var(--selection-bg); color: var(--selection-ink); }
 
@@ -151,8 +151,8 @@ a:hover { text-decoration-thickness: 2px; }
 :root[data-js] .theme-toggle { display: inline-grid; }
 .theme-toggle:hover { color: var(--color-strong); }
 .theme-toggle svg { grid-area: 1 / 1; }
-.theme-toggle .icon-moon, :root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
-:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+.theme-toggle .icon-sun, :root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
 main { padding-block: clamp(2rem, 6vw, 3.5rem) 1rem; }
 h1, h2 { color: var(--color-strong); font-weight: 650; letter-spacing: 0; }

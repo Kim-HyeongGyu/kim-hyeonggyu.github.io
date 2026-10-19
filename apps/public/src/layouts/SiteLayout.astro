@@ -38,24 +38,24 @@ const footerLinks = [...(blocks.email ? [{ label: content.email, href: `mailto:$
     <link rel="alternate" hreflang="ko" href={koreanHref} />
     <link rel="alternate" hreflang="x-default" href={englishHref} />
     <title>{title}</title>
-    <!-- The site's one progressive-enhancement script. Dark is the no-JS default; it applies a stored "light" choice
+    <!-- The site's one progressive-enhancement script. Light is the no-JS default; it applies a stored "dark" choice
          before first paint and reveals the theme button. The only browser storage is localStorage "theme" = light|dark. -->
     <script is:inline>
       (() => {
         const root = document.documentElement;
         root.setAttribute("data-js", "");
         let stored = null;
-        try { stored = localStorage.getItem("theme"); } catch { /* storage blocked: stay dark */ }
-        if (stored === "light") root.setAttribute("data-theme", "light");
+        try { stored = localStorage.getItem("theme"); } catch { /* storage blocked: stay light */ }
+        if (stored === "dark") root.setAttribute("data-theme", "dark");
         document.addEventListener("DOMContentLoaded", () => {
           const button = document.querySelector("[data-theme-toggle]");
           if (!button) return;
           const label = button.querySelector("[data-theme-label]");
-          const sync = () => { label.textContent = root.dataset.theme === "light" ? button.dataset.labelDark : button.dataset.labelLight; };
+          const sync = () => { label.textContent = root.dataset.theme === "dark" ? button.dataset.labelLight : button.dataset.labelDark; };
           sync();
           button.addEventListener("click", () => {
-            const next = root.dataset.theme === "light" ? "dark" : "light";
-            if (next === "light") root.setAttribute("data-theme", "light");
+            const next = root.dataset.theme === "dark" ? "light" : "dark";
+            if (next === "dark") root.setAttribute("data-theme", "dark");
             else root.removeAttribute("data-theme");
             try { localStorage.setItem("theme", next); } catch { /* not persisted; the page still switches */ }
             sync();
@@ -86,7 +86,7 @@ const footerLinks = [...(blocks.email ? [{ label: content.email, href: `mailto:$
         <button class="theme-toggle" type="button" data-theme-toggle data-label-light={content.themeToLight} data-label-dark={content.themeToDark}>
           <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-          <span class="visually-hidden" data-theme-label>{content.themeToLight}</span>
+          <span class="visually-hidden" data-theme-label>{content.themeToDark}</span>
         </button>
       </div>
     </header>

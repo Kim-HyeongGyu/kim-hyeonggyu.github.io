@@ -14,7 +14,7 @@
  *   role               One line under the name, written as it should read in each language. Empty string = hidden.
  *   affiliation        Optional; appended to the role line after a comma. Left empty because `role` already carries it.
  *   bio                First-person paragraphs per language. Each language shows only its own paragraphs.
- *   photoAlt           Alt text for the portrait on Home (`src/assets/profile.jpg`, an illustrated portrait supplied by the owner).
+ *   photoAlt           Alt text for the portrait on Home (`src/assets/profile.jpg`, the owner's profile photo, 320 px, metadata removed).
  *                      Empty string = no photo. Replacing the photo also means updating its pinned hash in
  *                      `scripts/export-public.mjs`, which refuses any other image bytes.
  *   education          Dated list under the bio on Home, newest first: { period, text }.
@@ -132,7 +132,7 @@ export const profile: Profile = {
       "오존존데 관측과 오존의 성층권–대류권 교환(STE)을 연구합니다. 동아시아 상공의 오존 연직 구조와 대규모 대기 역학의 관련성을 살펴봅니다. 겨울철 한반도의 폭설·강수와 그 종관 조건도 연구합니다."
     ]
   },
-  photoAlt: { en: "Illustrated portrait of Hyeong-Gyu Kim", ko: "Hyeong-Gyu Kim 일러스트 프로필" },
+  photoAlt: { en: "Photo of Hyeong-Gyu Kim", ko: "Hyeong-Gyu Kim 프로필 사진" },
   // Education: the owner's own dates and affiliations (2026-10-18), years only — the owner asked not to publish months.
   // The PhD entry matches the ORCID record.
   education: {
