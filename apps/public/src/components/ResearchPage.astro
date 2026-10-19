@@ -1,0 +1,64 @@
+---
+import type { ImageMetadata } from "astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Redirect from "./Redirect.astro";
+import { copy, isVisible, type Locale } from "../i18n";
+import { profile, visibleBlocks } from "../content/profile";
+
+interface Props {
+  locale: Locale;
+}
+
+// Without research data this address is not a tab and redirects to Home (owner request, 2026-10-18).
+const { locale } = Astro.props;
+const content = copy[locale];
+const { research: interests, projects } = visibleBlocks(profile, locale);
+
+// Card pictures are schematic SVGs in src/assets/research/; a project names its file there. A name with no file fails the build.
+const pictures = import.meta.glob<ImageMetadata>("../assets/research/*.svg", { eager: true, import: "default" });
+const picture = (name: string) => {
+  if (!name) return null;
+  const found = pictures[`../assets/research/${name}`];
+  if (!found) throw new Error(`profile.ts project image not found in src/assets/research/: ${name}`);
+  return found;
+};
+// Research, contract and personal projects are shown as separate groups (owner request, 2026-10-18).
+const kinds = ["research", "contract", "personal"] as const;
+const description = [interests.join(", "), projects.map((project) => project.title[locale]).join(", ")].filter(Boolean).join(" — ");
+---
+
+{isVisible(locale, "research") ? (
+  <SiteLayout locale={locale} page="research" title={`${content.nav.research} — ${profile.name[locale]}`} description={description}>
+    <h1>{content.nav.research}</h1>
+    {interests.length > 0 && (
+      <section aria-labelledby="interests-heading">
+        <h2 id="interests-heading">{content.researchInterests}</h2>
+        <ul class="interests">{interests.map((interest) => <li>{interest}</li>)}</ul>
+      </section>
+    )}
+    {kinds.map((kind) => {
+      const group = projects.filter((project) => project.kind === kind);
+      return group.length > 0 && (
+        <section class="project-group" aria-labelledby={`${kind}-projects`}>
+          <h2 id={`${kind}-projects`}>{content.projectGroups[kind]}</h2>
+          <ul class="project-cards">
+            {group.map((project) => {
+              const image = picture(project.image);
+              return (
+                <li class="project-card">
+                  {image && <img class="project-picture" src={image.src} width={image.width} height={image.height} alt={project.imageAlt[locale]} loading="lazy" decoding="async" />}
+                  <div class="project-body">
+                    {project.period[locale] && <p class="project-meta">{project.period[locale]}</p>}
+                    <h3>{project.title[locale]}</h3>
+                    {project.summary[locale] && <p>{project.summary[locale]}</p>}
+                    {project.funder[locale] && <p class="project-funder">{project.funder[locale]}</p>}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      );
+    })}
+  </SiteLayout>
+) : <Redirect locale={locale} page="home" />}

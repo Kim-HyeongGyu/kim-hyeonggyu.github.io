@@ -1,69 +1,209 @@
-.shell { width: min(calc(100% - 2rem), var(--public-shell)); margin-inline: auto; }
-.skip-link { position: fixed; left: 1rem; top: 1rem; z-index: 20; transform: translateY(-180%); background: var(--color-surface); padding: .75rem 1rem; border-radius: var(--radius-sm); }
-.skip-link:focus { transform: translateY(0); }
-.site-header { border-bottom: 1px solid rgb(203 200 189 / .75); background: rgb(244 241 232 / .94); position: relative; z-index: 2; }
-.header-inner { min-height: 5.5rem; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
-.header-actions { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-4); }
-.wordmark { display: inline-flex; align-items: center; gap: .75rem; color: var(--color-navy); text-decoration: none; font-weight: 800; letter-spacing: .04em; }
-.wordmark span { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid var(--color-navy); border-radius: 50%; font-size: .72rem; }
-.wordmark small { font: 500 .76rem/1 var(--font-mono); color: var(--color-ink-muted); letter-spacing: .08em; }
-nav ul { display: flex; flex-wrap: wrap; gap: .25rem; list-style: none; margin: 0; padding: 0; }
-nav a { display: inline-flex; min-height: 2.75rem; align-items: center; padding: .4rem .8rem; border-radius: 999px; color: var(--color-ink); text-decoration: none; font-size: .92rem; }
-nav a:hover, nav a[aria-current="page"] { background: var(--color-navy); color: white; }
-.language-switch { display: inline-flex; align-items: center; gap: .45rem; white-space: nowrap; font-size: .78rem; }
-.language-switch a { min-height: 2.75rem; padding: .35rem .15rem; border-radius: 0; color: var(--color-ink-muted); }
-.language-switch a:hover { background: transparent; color: var(--color-navy); text-decoration: underline; text-underline-offset: .22rem; }
-.language-switch a[aria-current="true"] { color: var(--color-navy); font-weight: 750; text-decoration: underline; text-decoration-color: var(--color-teal); text-underline-offset: .25rem; }
-.language-switch span { color: var(--color-border); }
-.hero { overflow: hidden; position: relative; padding: clamp(5rem, 10vw, 9rem) 0 clamp(4rem, 8vw, 7rem); }
-.hero::after { content: ""; position: absolute; width: 31rem; height: 31rem; right: -10rem; top: -15rem; border: 1px solid rgb(20 125 120 / .28); border-radius: 50%; box-shadow: 0 0 0 4rem rgb(20 125 120 / .04), 0 0 0 8rem rgb(20 125 120 / .035); pointer-events: none; }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(15rem, .75fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: end; position: relative; z-index: 1; }
-.eyebrow { margin: 0 0 1rem; font: 700 .73rem/1.3 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--color-teal-dark); }
-h1, h2 { font-family: var(--font-editorial); color: var(--color-navy); font-weight: 600; letter-spacing: -.025em; }
-h1 { max-width: 13ch; margin: 0; font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1.12; }
-.hero-lede { margin: var(--space-5) 0 0; max-width: 57ch; font-size: clamp(1.05rem, 1.5vw, 1.28rem); color: var(--color-ink-muted); }
-.hero-note { border-left: 2px solid var(--color-teal); padding-left: var(--space-5); }
-.hero-note strong { display: block; margin-bottom: .45rem; color: var(--color-navy); }
-.hero-note p { margin: 0; color: var(--color-ink-muted); }
-.section { padding: clamp(4rem, 8vw, 7rem) 0; }
-.section-tint { background: var(--color-navy); color: #eaf0ec; }
-.section-tint h2, .section-tint .eyebrow { color: white; }
-.section-heading { display: grid; grid-template-columns: .55fr 1.45fr; gap: var(--space-6); margin-bottom: var(--space-7); }
-.section-heading h1, .section-heading h2 { margin: 0; max-width: 16ch; font-size: clamp(2.25rem, 5vw, 4.2rem); line-height: 1.15; }
-.section-heading > p { max-width: var(--measure); margin: .35rem 0 0; color: var(--color-ink-muted); font-size: 1.06rem; }
-.section-tint .section-heading > p { color: #bfcbc8; }
-.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
-.pending-card { min-height: 18rem; display: flex; flex-direction: column; padding: var(--space-6); border: var(--border); border-radius: var(--radius-lg); background: var(--color-surface); }
-.pending-card h2 { font-size: 1.65rem; margin: 0 0 .75rem; }
-.pending-card > p:not(.eyebrow) { color: var(--color-ink-muted); margin: 0; }
-.pending-label { margin-top: auto; padding-top: var(--space-6); font: 650 .75rem/1.3 var(--font-mono); color: var(--color-ochre); }
-.bridge { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); align-items: center; }
-.bridge h2 { margin: 0 0 1rem; font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.15; }
-.boundary-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid #46616c; }
-.boundary-list li { padding: 1rem 0; border-bottom: 1px solid #46616c; display: flex; gap: 1rem; }
-.boundary-list span { color: #77c8c1; font: 700 .73rem var(--font-mono); }
-.page-hero { padding: clamp(4rem, 8vw, 7rem) 0 3rem; }
-.page-hero h1 { max-width: 15ch; font-size: clamp(3rem, 7vw, 5.5rem); }
-.page-hero p:last-child { max-width: 62ch; font-size: 1.12rem; color: var(--color-ink-muted); }
-.empty-editorial { margin-bottom: var(--space-9); padding: var(--space-7); border-top: 1px solid var(--color-navy); border-bottom: 1px solid var(--color-border); display: grid; grid-template-columns: .6fr 1.4fr; gap: var(--space-6); }
-.empty-editorial h2 { margin: 0; font-size: 1.8rem; }
-.empty-editorial p { margin: 0; max-width: var(--measure); color: var(--color-ink-muted); }
-.site-footer { border-top: var(--border); padding: var(--space-7) 0; }
-.footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); color: var(--color-ink-muted); font-size: .9rem; }
-.footer-grid p { margin: 0; }
-.footer-grid p:last-child { text-align: right; }
-
-@media (max-width: 700px) {
-  .header-inner { align-items: flex-start; flex-direction: column; padding-block: 1rem; }
-  .wordmark small { display: none; }
-  .header-actions { width: 100%; flex-direction: column-reverse; align-items: stretch; gap: .25rem; }
-  .primary-nav { width: 100%; }
-  .primary-nav ul { justify-content: space-between; }
-  .primary-nav a { padding-inline: .55rem; }
-  .language-switch { align-self: flex-end; }
-  .hero-grid, .section-heading, .bridge, .empty-editorial, .footer-grid { grid-template-columns: 1fr; }
-  .hero-note { margin-top: 1rem; }
-  .card-grid { grid-template-columns: 1fr; }
-  .pending-card { min-height: 14rem; }
-  .footer-grid p:last-child { text-align: left; }
+/* Public site only; shared tokens stay light for the dashboard.
+   Text-first academic page (owner request, 2026-10-18): one fluid column (40–56rem), one typeface, plain headings,
+   underlined links, no badges or gradients; the only pictures are the portrait and the Research schematics. Dark is the
+   default; light only by the header button. */
+:root {
+  color-scheme: dark;
+  --color-canvas: #030712;
+  --color-ink: #d4d7dd;
+  --color-strong: #f3f4f6;
+  --color-ink-muted: #9ca3af;
+  --color-link: #93c5fd;
+  --color-focus: #93c5fd;
+  --selection-bg: #1e3a8a;
+  --selection-ink: #f9fafb;
+  --color-map-land: #1a2231;
+  --color-map-line: #374151;
 }
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas: #ffffff;
+  --color-ink: #24292f;
+  --color-strong: #0d1117;
+  --color-ink-muted: #57606a;
+  --color-link: #0b5cad;
+  --color-focus: #0a6ccf;
+  --selection-bg: #cfe6f8;
+  --selection-ink: #0d1117;
+  --color-map-land: #e6e9ee;
+  --color-map-line: #c3c9d1;
+}
+::selection { background: var(--selection-bg); color: var(--selection-ink); }
+
+body { font-size: 1.0625rem; line-height: 1.7; }
+/* Side margins and the column grow with the window: ~5vw gutters, a 60vw column held between a
+   comfortable 40rem and a 56rem reading limit, so wide screens are not just empty space. */
+.page { width: min(calc(100% - 2 * clamp(1rem, 5vw, 6rem)), clamp(40rem, 60vw, 56rem)); margin-inline: auto; }
+p, li { word-break: keep-all; overflow-wrap: break-word; }
+/* Places map: faint land and accent dots. Hover, tap or focus a dot for what was done there; the Korea dot opens an
+   enlarged map of Korea. On phones the places also show as a list under the map. */
+.map-frame { position: relative; margin-block: .25rem 2rem; container-type: inline-size; }
+.work-map { margin-top: 0; }
+.work-map svg { display: block; width: 100%; height: auto; }
+.work-map .land { fill: var(--color-map-land); }
+.spot { position: absolute; z-index: 1; width: 1.5rem; height: 1.5rem; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; transform: translate(-50%, -50%); border-radius: 50%; cursor: pointer; }
+.spot::before { content: ""; position: absolute; inset: .45rem; border-radius: 50%; background: var(--color-link); box-shadow: 0 0 0 2px var(--color-canvas); }
+.spot-korea::before { inset: .375rem; box-shadow: 0 0 0 2px var(--color-canvas), 0 0 0 5px color-mix(in srgb, var(--color-link) 35%, transparent); }
+.spot:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.spot:hover, .spot:focus { z-index: 2; }
+.tip, .zoom { position: absolute; padding: .5rem .7rem; border: 1px solid var(--color-map-line); border-radius: .5rem;
+  background: var(--color-canvas); box-shadow: 0 6px 20px rgb(0 0 0 / .25); font-size: .8125rem; line-height: 1.35; white-space: nowrap; cursor: default; }
+/* On hover or focus an elbow line draws out of the dot — a diagonal, then a level run — and the description fades in at
+   its end. Near the right or top edge the elbow mirrors so the description stays on the map. */
+.tip, .zoom { opacity: 0; visibility: hidden; transition: opacity .15s ease, visibility 0s linear .15s; }
+.spot:hover .tip, .spot:focus .tip, .spot-korea:hover .zoom, .spot-korea:focus .zoom {
+  opacity: 1; visibility: visible; transition: opacity .2s ease .42s, visibility 0s linear .42s; }
+.lead-diag, .lead-flat { position: absolute; top: 50%; height: 1px; background: var(--color-ink-muted); pointer-events: none; }
+.lead-diag { left: 50%; width: 1.414rem; transform-origin: 0 50%; transform: rotate(-45deg) scaleX(0); transition: transform .1s ease-in .08s; }
+.lead-flat { left: calc(50% + 1rem); width: 1.25rem; margin-top: -1rem; transform-origin: left; transform: scaleX(0); transition: transform .08s ease-in; }
+.spot:hover .lead-diag, .spot:focus .lead-diag { transform: rotate(-45deg); transition: transform .2s ease-out; }
+.spot:hover .lead-flat, .spot:focus .lead-flat { transform: none; transition: transform .18s ease-out .2s; }
+.tip { display: grid; left: calc(50% + 2.3rem); top: calc(50% - 1rem); transform: translateY(-50%); }
+.flip-x .lead-diag, .spot.flip-x:hover .lead-diag, .spot.flip-x:focus .lead-diag { transform-origin: 0 50%; }
+.flip-x .lead-diag { transform: rotate(-135deg) scaleX(0); }
+.spot.flip-x:hover .lead-diag, .spot.flip-x:focus .lead-diag { transform: rotate(-135deg); }
+.flip-x .lead-flat { left: auto; right: calc(50% + 1rem); transform-origin: right; }
+.flip-x .tip { left: auto; right: calc(50% + 2.3rem); }
+.flip-y .lead-diag { transform: rotate(45deg) scaleX(0); }
+.spot.flip-y:hover .lead-diag, .spot.flip-y:focus .lead-diag { transform: rotate(45deg); }
+.flip-y.flip-x .lead-diag { transform: rotate(135deg) scaleX(0); }
+.spot.flip-y.flip-x:hover .lead-diag, .spot.flip-y.flip-x:focus .lead-diag { transform: rotate(135deg); }
+.flip-y .lead-flat { margin-top: 1rem; }
+.flip-y .tip { top: calc(50% + 1rem); }
+.tip strong, .zoom strong { display: block; color: var(--color-strong); font-weight: 600; }
+.tip span, .zoom-list li > span > span { color: var(--color-ink-muted); font-size: .75rem; }
+/* Korea's elbow runs down and to the left, into the open sea, and the zoom hangs from its end. */
+.zoom { display: grid; right: calc(50% + 2.3rem); top: calc(50% + 1rem); grid-template-columns: 11rem auto; gap: .75rem; align-items: center; }
+/* Only the dot under the cursor or focus pulses: it glows softly and two rings ripple outwards in turn. */
+.spot:hover::before, .spot:focus::before { animation: spot-glow 2.4s ease-in-out infinite; }
+.ripple { position: absolute; left: 50%; top: 50%; width: .75rem; height: .75rem; margin: -.375rem 0 0 -.375rem; border: 1.5px solid var(--color-link);
+  border-radius: 50%; opacity: 0; pointer-events: none; }
+.spot:hover .ripple, .spot:focus .ripple { animation: spot-ripple 2.4s ease-out infinite; }
+.spot:hover .ripple-late, .spot:focus .ripple-late { animation-delay: 1.2s; }
+@keyframes spot-ripple { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(3.6); opacity: 0; } }
+@keyframes spot-glow { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) {
+  .lead-diag, .lead-flat, .tip, .zoom, .spot:hover .tip, .spot:focus .tip, .spot-korea:hover .zoom, .spot-korea:focus .zoom,
+  .spot:hover .lead-diag, .spot:focus .lead-diag, .spot:hover .lead-flat, .spot:focus .lead-flat { transition: none; }
+  .spot:hover::before, .spot:focus::before { animation: none; }
+  .spot:hover .ripple, .spot:focus .ripple { animation: none; opacity: .5; transform: scale(1.8); }
+  .ripple-late { display: none; }
+}
+.zoom-map { position: relative; display: block; }
+.zoom-map svg { width: 11rem; }
+.zoom-dot { position: absolute; display: grid; place-items: center; width: .95rem; height: .95rem; transform: translate(-50%, -50%);
+  border-radius: 50%; background: var(--color-link); color: var(--color-canvas); font-size: .625rem; font-weight: 700; box-shadow: 0 0 0 1.5px var(--color-canvas); }
+.zoom-list { display: grid; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+.zoom-list li { display: flex; align-items: start; gap: .45rem; }
+.zoom-num { display: grid; place-items: center; flex: none; width: 1.05rem; height: 1.05rem; margin-top: .1rem; border-radius: 50%;
+  background: var(--color-link); color: var(--color-canvas); font-size: .625rem; font-weight: 700; }
+/* A narrower map has no room beside Korea: the zoom opens below the dot instead, without the elbow. */
+@container (max-width: 46rem) {
+  .spot-korea .zoom { left: 50%; right: auto; top: calc(50% + 1.25rem); transform: translateX(-50%); }
+  .spot-korea .lead-diag, .spot-korea .lead-flat { display: none; }
+}
+.places { display: none; }
+@media (max-width: 40rem) {
+  .places { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin: -1.25rem 0 2rem; padding: 0; list-style: none; color: var(--color-ink-muted); font-size: .9375rem; }
+  .place-dot { display: inline-block; width: .5rem; height: .5rem; margin-right: .45rem; border-radius: 50%; background: var(--color-link); vertical-align: .1em; }
+  .zoom { left: 50%; top: calc(50% + 1rem); transform: translateX(-50%); grid-template-columns: 8rem auto; }
+  /* Phones: popups take no room until asked for, so the page never scrolls sideways. */
+  .tip, .zoom { display: none; }
+  .spot:hover .tip, .spot:focus .tip, .spot-korea:hover .zoom, .spot-korea:focus .zoom { display: grid; }
+  .zoom-map svg { width: 8rem; }
+  /* A description beside a dot would run off a phone screen: it spans the map instead (`--x` is the dot's share of the
+     map width), above the dot or, near the top, below it, without the elbow. */
+  .spot .tip { left: calc(.75rem - var(--x) * 100cqw); right: auto; top: auto; bottom: calc(50% + .9rem); width: 100cqw; box-sizing: border-box; transform: none; white-space: normal; }
+  .flip-y .tip { top: calc(50% + .9rem); bottom: auto; }
+  .spot:not(.spot-korea) .lead-diag, .spot:not(.spot-korea) .lead-flat { display: none; }
+}
+
+/* Education and Experience: dated lists; the period column stays aligned and drops above the text on phones. */
+.timeline { margin: 0 0 2rem; padding: 0; list-style: none; }
+.timeline li { display: grid; grid-template-columns: 7.5rem 1fr; gap: .25rem 1rem; padding-block: .35rem; }
+.timeline .period { color: var(--color-ink-muted); font-variant-numeric: tabular-nums; }
+/* Home: the owner's portrait on the left, exactly as tall as the name line plus the first role line beside it. */
+.intro { display: flex; align-items: flex-start; gap: 1rem; }
+.portrait { flex: none; order: -1; width: calc(2rem * 1.25 + .25rem + 1.0625rem * 1.7); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; }
+a { color: var(--color-link); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+.skip-link { position: fixed; left: 1rem; top: 1rem; z-index: 1; transform: translateY(-200%); padding: .5rem .75rem; background: var(--color-canvas); }
+.skip-link:focus { transform: translateY(0); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Header: page tabs, language links and the theme button on the right.
+   Wide: one row. Narrow: tools on the first row, tabs on their own row below (no JavaScript menu). */
+.site-header { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "tabs tools"; align-items: center; column-gap: 1.25rem; padding-block: .75rem; font-size: .9375rem; }
+.page-tabs { grid-area: tabs; justify-self: end; }
+.page-tabs ul { display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+.page-tabs a { display: inline-flex; align-items: center; min-height: 2.75rem; padding-inline: .6rem; color: var(--color-ink-muted); text-decoration: none; }
+.page-tabs a:hover { color: var(--color-strong); text-decoration: underline; }
+.page-tabs a[aria-current="page"] { color: var(--color-strong); font-weight: 600; box-shadow: inset 0 -2px 0 var(--color-link); }
+.page-tabs a[aria-current="page"]:hover { text-decoration: none; }
+.header-tools { grid-area: tools; display: flex; align-items: center; gap: .5rem; }
+.language-switch { display: flex; align-items: center; gap: .4rem; white-space: nowrap; color: var(--color-ink-muted); }
+.language-switch a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--color-ink-muted); }
+.language-switch a[aria-current="true"] { color: var(--color-strong); text-decoration: none; }
+/* Theme button: absent without JavaScript; shown from first paint once the head script marks html[data-js]. */
+.theme-toggle { display: none; place-items: center; width: 2.75rem; height: 2.75rem; margin-right: -.75rem; padding: 0; border: 0; background: transparent; color: var(--color-ink-muted); cursor: pointer; }
+:root[data-js] .theme-toggle { display: inline-grid; }
+.theme-toggle:hover { color: var(--color-strong); }
+.theme-toggle svg { grid-area: 1 / 1; }
+.theme-toggle .icon-moon, :root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+main { padding-block: clamp(2rem, 6vw, 3.5rem) 1rem; }
+h1, h2 { color: var(--color-strong); font-weight: 650; letter-spacing: 0; }
+h1 { margin: 0; font-size: 2rem; line-height: 1.25; }
+h2 { margin: 0 0 .75rem; font-size: 1.1875rem; line-height: 1.4; }
+.role { margin: .25rem 0 1.5rem; color: var(--color-ink-muted); }
+section { margin-top: 1.5rem; }
+.interests { margin: 0; padding-left: 1.25rem; }
+/* Research: one card per approved project, grouped by kind — the picture on the left (when there is one) and beside it
+   the years, title, summary and funder. On phones the text drops below the picture. */
+/* Space between the Research, Contract and Personal groups so each kind stands apart. */
+.project-group + .project-group { margin-top: 3.5rem; }
+.project-cards { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.project-card { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); overflow: hidden; border: 1px solid var(--color-map-line); border-radius: .75rem; background: var(--color-canvas); }
+.project-picture { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-right: 1px solid var(--color-map-line); }
+.project-body:only-child { grid-column: 1 / -1; }
+.project-body { display: grid; align-content: center; gap: .4rem; padding: 1rem 1.25rem; font-size: .9375rem; line-height: 1.55; }
+.project-body p { margin: 0; }
+.project-body h3 { margin: 0; color: var(--color-strong); font-size: 1.0625rem; font-weight: 650; line-height: 1.4; }
+.project-meta, .project-funder { color: var(--color-ink-muted); font-size: .8125rem; }
+/* Scrolling down, each card rises into place as it enters the window. CSS scroll-driven animation only: browsers
+   without it, and readers who prefer less motion, simply see the cards. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .project-card { animation: card-rise linear both; }
+    /* A separate rule: the minifier would otherwise fold the timeline into the shorthand, which browsers reject. */
+    .project-cards > .project-card { animation-timeline: view(); animation-range: entry 0% entry 70%; }
+  }
+}
+@media (max-width: 40rem) {
+  .project-card { grid-template-columns: 1fr; }
+  .project-picture { border-right: 0; border-bottom: 1px solid var(--color-map-line); }
+}
+@keyframes card-rise { from { opacity: 0; transform: translateY(3rem); } to { opacity: 1; transform: none; } }
+
+.publications { margin: 0; padding: 0; list-style: none; }
+.publications li { margin-bottom: 1.5rem; line-height: 1.55; word-break: normal; }
+.pub-title, .pub-authors, .pub-venue { display: block; }
+.pub-title { width: fit-content; margin-bottom: .2rem; color: var(--color-strong); font-weight: 600; }
+.pub-authors, .pub-venue { color: var(--color-ink-muted); font-size: .9375rem; }
+.pub-authors strong { color: var(--color-ink); font-weight: 650; white-space: nowrap; }
+
+@media (max-width: 40rem) {
+  .timeline li { grid-template-columns: 1fr; gap: 0; }
+  .site-header { grid-template-columns: 1fr auto; grid-template-areas: ". tools" "tabs tabs"; }
+  .page-tabs { justify-self: start; margin-left: -.6rem; }
+}
+
+.site-footer { padding-block: 2.5rem 3rem; color: var(--color-ink-muted); font-size: .875rem; }
+.site-footer p { margin: 0; }
+.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.footer-links { display: flex; gap: .25rem; margin: 0 -.6rem 0 0; padding: 0; list-style: none; }
+.footer-links a { display: inline-grid; place-items: center; min-width: 2.75rem; min-height: 2.75rem; color: var(--color-ink-muted); }
+.footer-links a:hover, .footer-links a:focus-visible { color: var(--color-ink); }

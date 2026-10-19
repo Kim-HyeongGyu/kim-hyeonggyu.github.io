@@ -1,54 +1,44 @@
 ---
-import PendingContent from "./PendingContent.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import { copy, type Locale } from "../i18n";
+import { profile, visibleBlocks } from "../content/profile";
+import photo from "../assets/profile.jpg";
+import WorkMap from "./WorkMap.astro";
 
 interface Props {
   locale: Locale;
 }
 
+// Every block renders only when profile.ts has data for it (owner request, 2026-10-18).
 const { locale } = Astro.props;
-const common = copy[locale];
-const content = common.home;
+const name = profile.name[locale];
+const blocks = visibleBlocks(profile, locale);
+const photoAlt = profile.photoAlt[locale];
+const content = copy[locale];
+const timelines = [
+  { id: "education", heading: content.education, items: blocks.education },
+  { id: "experience", heading: content.experience, items: blocks.experience },
+];
 ---
 
-<SiteLayout locale={locale} routeKey="home" title={content.title} description={content.description}>
-  <section class="hero">
-    <div class="shell hero-grid">
-      <div>
-        <p class="eyebrow">{content.heroEyebrow}</p>
-        <h1>{content.heroTitle}</h1>
-        <p class="hero-lede">{content.heroLede}</p>
-      </div>
-      <aside class="hero-note" aria-label={content.statusLabel}>
-        <strong>{content.statusTitle}</strong>
-        <p>{content.statusBody}</p>
-      </aside>
+<SiteLayout locale={locale} page="home" title={name} description={blocks.roleLine ? `${name}, ${blocks.roleLine}` : name}>
+  <div class="intro">
+    <div>
+      <h1>{name}</h1>
+      {blocks.roleLine && <p class="role">{blocks.roleLine}</p>}
     </div>
-  </section>
-
-  <section class="section" aria-labelledby="public-sections">
-    <div class="shell">
-      <div class="section-heading">
-        <div><p class="eyebrow">{content.recordEyebrow}</p><h2 id="public-sections">{content.recordTitle}</h2></div>
-        <p>{content.recordBody}</p>
-      </div>
-      <div class="card-grid">
-        {content.cards.map((card) => <PendingContent {...card} label={common.pendingLabel} />)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-tint" aria-labelledby="private-boundary">
-    <div class="shell bridge">
-      <div>
-        <p class="eyebrow">{content.privateEyebrow}</p>
-        <h2 id="private-boundary">{content.privateTitle}</h2>
-        <p>{content.privateBody}</p>
-      </div>
-      <ul class="boundary-list">
-        {content.boundaries.map((boundary, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{boundary}</li>)}
+    {photoAlt && <img class="portrait" src={photo.src} width="160" height="160" alt={photoAlt} decoding="async" />}
+  </div>
+  {blocks.bio.map((paragraph) => <p>{paragraph}</p>)}
+  {timelines.map((list) => list.items.length > 0 && (
+    <section aria-labelledby={list.id}>
+      <h2 id={list.id}>{list.heading}</h2>
+      <ul class="timeline">
+        {list.items.map((item) => (
+          <li><span class="period">{item.period}</span><span>{item.text}</span></li>
+        ))}
       </ul>
-    </div>
-  </section>
+    </section>
+  ))}
+  {blocks.places.length > 0 && <WorkMap places={blocks.places} locale={locale} heading={content.places} koreaLabel={content.korea} />}
 </SiteLayout>

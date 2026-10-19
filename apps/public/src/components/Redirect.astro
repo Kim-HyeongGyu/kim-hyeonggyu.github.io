@@ -1,0 +1,32 @@
+---
+import { copy, isVisible, pagePath, type Locale, type PageKey } from "../i18n";
+
+interface Props {
+  /** Language of the destination page. */
+  locale: Locale;
+  /** Destination page; Home when that page has no data in this language. */
+  page: PageKey;
+}
+
+// Retired or empty public URLs (owner request, 2026-10-18) stay as static redirects: meta refresh, canonical link and a
+// plain link, so they work without JavaScript.
+const { locale, page } = Astro.props;
+const content = copy[locale];
+const target = pagePath(import.meta.env.BASE_URL, locale, isVisible(locale, page) ? page : "home");
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>{content.movedTitle}</title>
+    <style is:inline>html { background: #030712; color: #e5e7eb; font: 17px/1.7 sans-serif; } body { margin: 2rem 1rem; } a { color: #93c5fd; }</style>
+  </head>
+  <body>
+    <main><p><a href={target}>{content.movedLink}</a></p></main>
+  </body>
+</html>

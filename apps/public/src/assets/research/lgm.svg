@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="Pretendard, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+  <!-- Schematic, seen from above the South Pole: glacial sea ice spreads past the pre-industrial ice edge (dashed), and
+       through the storm-track eddies the westerlies strengthen and shift poleward. -->
+  <defs>
+    <radialGradient id="sea" cx=".5" cy=".5" r=".6"><stop offset="0" stop-color="#2a6aa0"/><stop offset="1" stop-color="#143a5e"/></radialGradient>
+    <marker id="head" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ffd166"/></marker>
+    <marker id="ice" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3.5" markerHeight="3.5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#5b86ad"/></marker>
+    <marker id="faint" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9fc1dd"/></marker>
+  </defs>
+  <rect width="800" height="600" fill="url(#sea)"/>
+  <!-- glacial sea ice, pre-industrial ice edge (dashed) and Antarctica -->
+  <circle cx="400" cy="300" r="150" fill="#e4f1fb"/>
+  <circle cx="400" cy="300" r="112" fill="none" stroke="#5b86ad" stroke-width="3" stroke-dasharray="9 7"/>
+  <path d="M355 220 Q 400 205 445 225 Q 490 240 482 290 Q 490 345 440 372 Q 395 392 360 368 Q 318 350 322 300 Q 312 250 355 220z" fill="#ffffff" stroke="#b9cfe0" stroke-width="2"/>
+  <!-- the ice edge moves out -->
+  <g stroke="#5b86ad" stroke-width="4" stroke-linecap="round" marker-end="url(#ice)">
+    <path d="M479 221L499 201"/><path d="M479 379L499 399"/><path d="M321 379L301 399"/><path d="M321 221L301 201"/>
+  </g>
+  <!-- storm-track eddies -->
+  <g fill="none" stroke="#cfe4f5" stroke-width="3" stroke-linecap="round">
+    <path d="M232 160 a16 16 0 1 1 22 20 a8 8 0 1 1 -8 -12"/>
+    <path d="M575 455 a16 16 0 1 1 22 20 a8 8 0 1 1 -8 -12"/>
+    <path d="M205 410 a14 14 0 1 1 18 18 a7 7 0 1 1 -7 -10"/>
+  </g>
+  <!-- westerlies: pre-industrial (faint, outer) and glacial (bold, stronger, closer to the pole); eastward is clockwise here -->
+  <path d="M400 55 A245 245 0 1 1 155 300" fill="none" stroke="#9fc1dd" stroke-width="4" stroke-dasharray="12 9" marker-end="url(#faint)" opacity=".8"/>
+  <path d="M400 92 A208 208 0 1 1 192 300" fill="none" stroke="#ffd166" stroke-width="14" stroke-linecap="round" marker-end="url(#head)"/>
+  <g font-weight="700" fill="#ffffff">
+    <text x="24" y="50" font-size="32">Westerlies</text>
+    <text x="24" y="86" font-size="26" fill="#ffd166">stronger, shifted poleward</text>
+    <text x="776" y="560" font-size="30" text-anchor="end">Sea ice expands</text>
+    <text x="190" y="470" font-size="24" fill="#cfe4f5" text-anchor="middle">eddies</text>
+  </g>
+</svg>

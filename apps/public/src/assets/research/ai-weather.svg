@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="Pretendard, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+  <!-- Schematic: road-weather stations along an expressway; road-surface temperature and icing are estimated at the
+       unobserved points between them, and every 500 m section of the road gets an icing-risk class. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfdeec"/><stop offset="1" stop-color="#f3f7fb"/></linearGradient>
+    <marker id="head" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d9822b"/></marker>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <!-- falling snow -->
+  <g fill="#ffffff" stroke="#9fb6cc" stroke-width="1.5">
+    <circle cx="60" cy="40" r="6"/><circle cx="250" cy="70" r="5"/><circle cx="420" cy="30" r="6"/><circle cx="560" cy="80" r="5"/><circle cx="740" cy="45" r="6"/><circle cx="660" cy="130" r="4"/><circle cx="330" cy="140" r="4"/>
+  </g>
+  <!-- the expressway -->
+  <rect x="20" y="300" width="760" height="70" rx="8" fill="#4a5361"/>
+  <path d="M40 335H760" stroke="#f3f7fb" stroke-width="4" stroke-dasharray="26 18"/>
+  <!-- road-weather stations (observed) -->
+  <g stroke="#2d4f7c" stroke-width="5" stroke-linecap="round"><path d="M140 300V196"/><path d="M450 300V196"/><path d="M700 300V196"/></g>
+  <g fill="#2d6cdf" stroke="#ffffff" stroke-width="3"><rect x="114" y="168" width="52" height="34" rx="6"/><rect x="424" y="168" width="52" height="34" rx="6"/><rect x="674" y="168" width="52" height="34" rx="6"/></g>
+  <g fill="#ffffff"><circle cx="140" cy="185" r="6"/><circle cx="450" cy="185" r="6"/><circle cx="700" cy="185" r="6"/></g>
+  <!-- unobserved points, estimated from the stations around them -->
+  <g fill="none" stroke="#d9822b" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#head)">
+    <path d="M170 210 Q 230 200 280 270"/><path d="M420 210 Q 360 200 318 270"/><path d="M670 210 Q 620 205 590 270"/>
+  </g>
+  <g fill="#ffffff" stroke="#d9822b" stroke-width="4"><circle cx="300" cy="300" r="20"/><circle cx="580" cy="300" r="20"/></g>
+  <g font-size="26" font-weight="800" fill="#d9822b" text-anchor="middle"><text x="300" y="310">?</text><text x="580" y="310">?</text></g>
+  <!-- icing risk for each 500 m section -->
+  <g stroke="#f3f7fb" stroke-width="3">
+    <rect x="20" y="400" width="63" height="40" fill="#58b368"/><rect x="83" y="400" width="63" height="40" fill="#58b368"/><rect x="146" y="400" width="63" height="40" fill="#f2c14e"/>
+    <rect x="209" y="400" width="63" height="40" fill="#e4572e"/><rect x="272" y="400" width="63" height="40" fill="#e4572e"/><rect x="335" y="400" width="63" height="40" fill="#f2c14e"/>
+    <rect x="398" y="400" width="63" height="40" fill="#58b368"/><rect x="461" y="400" width="63" height="40" fill="#58b368"/><rect x="524" y="400" width="63" height="40" fill="#f2c14e"/>
+    <rect x="587" y="400" width="63" height="40" fill="#e4572e"/><rect x="650" y="400" width="63" height="40" fill="#f2c14e"/><rect x="713" y="400" width="67" height="40" fill="#58b368"/>
+  </g>
+  <!-- a patch of ice on the road -->
+  <path d="M232 352 q 20 -10 40 0 q 20 10 40 0" fill="none" stroke="#bfe3f7" stroke-width="6" stroke-linecap="round"/>
+  <g font-weight="700" fill="#1f2a3a">
+    <text x="24" y="134" font-size="28">Road-weather stations</text>
+    <text x="780" y="500" font-size="30" text-anchor="end">Icing risk per 500 m</text>
+    <text x="24" y="500" font-size="26" fill="#d9822b">? = estimated</text>
+  </g>
+  <g font-size="22" font-weight="600" fill="#3b4656">
+    <rect x="24" y="530" width="22" height="22" fill="#58b368"/><text x="54" y="549">low</text>
+    <rect x="114" y="530" width="22" height="22" fill="#f2c14e"/><text x="144" y="549">medium</text>
+    <rect x="244" y="530" width="22" height="22" fill="#e4572e"/><text x="274" y="549">high</text>
+  </g>
+</svg>

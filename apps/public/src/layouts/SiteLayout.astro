@@ -2,21 +2,28 @@
 import "../../../../packages/ui-tokens/tokens.css";
 import "../styles/public.css";
 import fontLicense from "../../../../packages/ui-tokens/fonts/OFL.txt?url";
-import { copy, localePath, routeKeys, type Locale, type RouteKey } from "../i18n";
+import { copy, isVisible, pagePath, tabs, type Locale, type PageKey } from "../i18n";
+import { profile, visibleBlocks } from "../content/profile";
+import LinkIcon from "../components/LinkIcon.astro";
 
 interface Props {
   locale: Locale;
-  routeKey: RouteKey;
+  page: PageKey;
   title: string;
   description: string;
 }
 
-const { locale, routeKey, title, description } = Astro.props;
+const { locale, page, title, description } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const content = copy[locale];
-const links = routeKeys.map((key) => ({ key, href: localePath(base, locale, key), label: content.nav[key] }));
-const koreanHref = localePath(base, "ko", routeKey);
-const englishHref = localePath(base, "en", routeKey);
+// Language links go to the same page in the other language, or to its Home when that page has no data there.
+const equivalent = (other: Locale) => pagePath(base, other, isVisible(other, page) ? page : "home");
+const englishHref = equivalent("en");
+const koreanHref = equivalent("ko");
+const pageTabs = tabs(locale);
+// ORCID, GitHub (and an email, if one is ever approved) sit at the bottom right of every page.
+const blocks = visibleBlocks(profile, locale);
+const footerLinks = [...(blocks.email ? [{ label: content.email, href: `mailto:${blocks.email}` }] : []), ...blocks.links];
 ---
 
 <!doctype html>
@@ -27,43 +34,78 @@ const englishHref = localePath(base, "en", routeKey);
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="license" href={fontLicense} />
-    <link rel="alternate" hreflang="ko" href={koreanHref} />
     <link rel="alternate" hreflang="en" href={englishHref} />
-    <link rel="alternate" hreflang="x-default" href={koreanHref} />
+    <link rel="alternate" hreflang="ko" href={koreanHref} />
+    <link rel="alternate" hreflang="x-default" href={englishHref} />
     <title>{title}</title>
+    <!-- The site's one progressive-enhancement script. Dark is the no-JS default; it applies a stored "light" choice
+         before first paint and reveals the theme button. The only browser storage is localStorage "theme" = light|dark. -->
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        root.setAttribute("data-js", "");
+        let stored = null;
+        try { stored = localStorage.getItem("theme"); } catch { /* storage blocked: stay dark */ }
+        if (stored === "light") root.setAttribute("data-theme", "light");
+        document.addEventListener("DOMContentLoaded", () => {
+          const button = document.querySelector("[data-theme-toggle]");
+          if (!button) return;
+          const label = button.querySelector("[data-theme-label]");
+          const sync = () => { label.textContent = root.dataset.theme === "light" ? button.dataset.labelDark : button.dataset.labelLight; };
+          sync();
+          button.addEventListener("click", () => {
+            const next = root.dataset.theme === "light" ? "dark" : "light";
+            if (next === "light") root.setAttribute("data-theme", "light");
+            else root.removeAttribute("data-theme");
+            try { localStorage.setItem("theme", next); } catch { /* not persisted; the page still switches */ }
+            sync();
+          });
+        });
+      })();
+    </script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">{content.skipLink}</a>
-    <header class="site-header">
-      <div class="shell header-inner">
-        <a class="wordmark" href={localePath(base, locale, "home")} aria-label={content.homeLabel}>
-          <span>HGK</span>
-          <small>research notebook</small>
-        </a>
-        <div class="header-actions">
-          <nav class="primary-nav" aria-label={content.primaryNavLabel}>
-            <ul>
-              {links.map((link) => (
-                <li><a href={link.href} aria-current={routeKey === link.key ? "page" : undefined}>{link.label}</a></li>
-              ))}
-            </ul>
-          </nav>
-          <nav class="language-switch" aria-label={content.languageNavLabel}>
-            <a href={koreanHref} lang="ko" hreflang="ko" aria-current={locale === "ko" ? "true" : undefined}>한국어</a>
-            <span aria-hidden="true">/</span>
-            <a href={englishHref} lang="en" hreflang="en" aria-current={locale === "en" ? "true" : undefined}>English</a>
-          </nav>
-        </div>
+    <header class="site-header page">
+      {/* No name at the top left (owner request, 2026-10-18): the page title already says it; Home is the first tab. */}
+      {pageTabs.length > 1 && (
+        <nav class="page-tabs" aria-label={content.pagesNavLabel}>
+          <ul>
+            {pageTabs.map((key) => (
+              <li><a href={pagePath(base, locale, key)} aria-current={key === page ? "page" : undefined}>{content.nav[key]}</a></li>
+            ))}
+          </ul>
+        </nav>
+      )}
+      <div class="header-tools">
+        <nav class="language-switch" aria-label={content.languageNavLabel}>
+          <a href={englishHref} lang="en" hreflang="en" aria-current={locale === "en" ? "true" : undefined}>English</a>
+          <span aria-hidden="true">/</span>
+          <a href={koreanHref} lang="ko" hreflang="ko" aria-current={locale === "ko" ? "true" : undefined}>한국어</a>
+        </nav>
+        <button class="theme-toggle" type="button" data-theme-toggle data-label-light={content.themeToLight} data-label-dark={content.themeToDark}>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M19.5 14.6A7.8 7.8 0 0 1 9.4 4.5a7.8 7.8 0 1 0 10.1 10.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span class="visually-hidden" data-theme-label>{content.themeToLight}</span>
+        </button>
       </div>
     </header>
-    <main id="main-content">
+    <main id="main-content" class="page">
       <slot />
     </main>
-    <footer class="site-footer">
-      <div class="shell footer-grid">
-        <p><strong>Hyeong-Gyu Kim</strong><br />Research notebook</p>
-        <p>{content.footerBoundary}</p>
-      </div>
+    <footer class="site-footer page">
+      <p>© 2026 {profile.name[locale]}</p>
+      {footerLinks.length > 0 && (
+        <ul class="footer-links">
+          {footerLinks.map((link) => (
+            <li>
+              {"icon" in link && link.icon
+                ? <a href={link.href} aria-label={link.label} title={link.label}><LinkIcon name={link.icon} /></a>
+                : <a href={link.href}>{link.label}</a>}
+            </li>
+          ))}
+        </ul>
+      )}
     </footer>
   </body>
 </html>

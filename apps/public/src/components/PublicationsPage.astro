@@ -1,0 +1,68 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import Redirect from "./Redirect.astro";
+import { copy, isVisible, type Locale } from "../i18n";
+import { displayAuthor, isOwner, profile, visibleBlocks } from "../content/profile";
+
+interface Props {
+  locale: Locale;
+}
+
+// Without publications or books this address is not a tab and redirects to Home (owner request, 2026-10-18).
+// The DOI, not the title, is the link (owner request, 2026-10-18). Papers are shown as published in English; a paper written in Korean shows its Korean record on the Korean page.
+// Books are shown as published in Korean on the Korean page; the English page shows a translated title and no publisher.
+const { locale } = Astro.props;
+const content = copy[locale];
+const { publications, books } = visibleBlocks(profile, locale);
+const record = (item: (typeof publications)[number]) =>
+  locale === "ko" && item.ko ? { ...item.ko, lang: "ko" } : { title: item.title, authors: item.authors, venue: item.venue, lang: "en" };
+---
+
+{isVisible(locale, "publications") ? (
+  <SiteLayout locale={locale} page="publications" title={`${content.nav.publications} — ${profile.name[locale]}`} description={`${content.nav.publications} — ${profile.name[locale]}`}>
+    <h1>{content.nav.publications}</h1>
+    {publications.length > 0 && (
+      <section aria-labelledby="papers">
+        <h2 id="papers">{content.papers}</h2>
+        <ul class="publications">
+          {publications.map((item) => {
+            const shown = record(item);
+            return (
+              <li lang={shown.lang}>
+                <span class="pub-title">{shown.title}</span>
+                <span class="pub-authors">
+                  {shown.authors.map((author, index) => <>{index > 0 && ", "}{isOwner(profile, author) ? <strong>{displayAuthor(author)}</strong> : displayAuthor(author)}</>)}
+                </span>
+                <span class="pub-venue">
+                  <em>{shown.venue}</em>, {item.year}
+                  {item.preprint && <> · <span lang={locale}>{content.preprint}</span></>}
+                  {" · "}<a class="pub-doi" href={`https://doi.org/${item.doi}`} lang="en">doi:{item.doi}</a>
+                  {item.links.map((link) => <> · <a href={link.href}>{link.label}</a></>)}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+    {books.length > 0 && (
+      <section aria-labelledby="books">
+        <h2 id="books">{content.books}</h2>
+        <ul class="publications">
+          {books.map((book) => {
+            const shown = locale === "en" && book.en ? book.en : book;
+            return (
+              <li lang={locale}>
+                <span class="pub-title">{shown.title}</span>
+                <span class="pub-authors">
+                  {shown.authors.map((author, index) => <>{index > 0 && ", "}{isOwner(profile, author) ? <strong>{author}</strong> : author}</>)}
+                </span>
+                <span class="pub-venue">{locale === "ko" && <>{book.publisher}, </>}{book.year} · <span lang="en">ISBN {book.isbn}</span></span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+  </SiteLayout>
+) : <Redirect locale={locale} page="home" />}

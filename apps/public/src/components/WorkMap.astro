@@ -1,0 +1,77 @@
+---
+// A faint world map centred on Korea with one dot per place in profile.ts. Hovering, tapping or focusing a dot draws an
+// elbow line (a diagonal, then a level run) and then shows what was done there; only that dot pulses in ripples; the Korean places share one dot that opens an enlarged map of Korea towards the lower left. CSS only: no scripts,
+// tiles or external requests. Each dot is focusable and carries its text as an accessible name; on phones the same
+// places also show as a plain list under the map, and a description spans the map's width above or below its dot. No visible heading: the map follows Experience directly (owner request,
+// 2026-10-18); `heading` names the section for screen readers.
+import { KOREA, WORLD, koreaLand, worldLand } from "../content/world-map";
+import type { Place } from "../content/profile";
+import type { Locale } from "../i18n";
+
+interface Props {
+  places: Place[];
+  locale: Locale;
+  heading: string;
+  koreaLabel: string;
+}
+
+const { places, locale, heading, koreaLabel } = Astro.props;
+const width = 360;
+const height = WORLD.north - WORLD.south;
+const west = WORLD.center - 180;
+const pct = (value: number, of: number) => `${((value / of) * 100).toFixed(2)}%`;
+const at = (p: { lat: number; lon: number }) => {
+  const x = ((((p.lon - west) % 360) + 360) % 360);
+  const y = WORLD.north - Math.max(WORLD.south, p.lat);
+  return { x: (x / width).toFixed(4), left: pct(x, width), top: pct(y, height), nearTop: y / height < 0.3, nearRight: x / width > 0.62 };
+};
+const inKorea = (p: Place) => p.lat <= KOREA.north && p.lat >= KOREA.south && p.lon >= KOREA.west && p.lon <= KOREA.east;
+const text = (p: Place) => `${p.name[locale]} — ${p.note[locale]}`;
+const short = (p: Place) => p.name[locale].replace(/, Korea$/, "");
+
+// North to south; places at almost the same latitude go east first.
+const koreans = places.filter(inKorea).sort((a, b) => (Math.abs(a.lat - b.lat) < 0.25 ? b.lon - a.lon : b.lat - a.lat));
+const others = places.filter((p) => !inKorea(p));
+const korea = koreans.length
+  ? at({ lat: koreans.reduce((s, p) => s + p.lat, 0) / koreans.length, lon: koreans.reduce((s, p) => s + p.lon, 0) / koreans.length })
+  : null;
+const zoom = (p: Place) => ({
+  left: pct(p.lon - KOREA.west, KOREA.east - KOREA.west),
+  top: pct(KOREA.north - p.lat, KOREA.north - KOREA.south),
+});
+---
+
+<section class="work-map" aria-label={heading}>
+  <div class="map-frame">
+    <svg viewBox={`0 0 ${width} ${height}`} aria-hidden="true" focusable="false"><path class="land" d={worldLand} /></svg>
+    {others.map((p) => {
+      const pos = at(p);
+      return (
+        <button type="button" class:list={["spot", { "flip-y": pos.nearTop, "flip-x": pos.nearRight }]} style={`left: ${pos.left}; top: ${pos.top}; --x: ${pos.x};`} aria-label={text(p)}>
+          <span class="ripple" aria-hidden="true"></span><span class="ripple ripple-late" aria-hidden="true"></span>
+          <span class="lead-diag" aria-hidden="true"></span><span class="lead-flat" aria-hidden="true"></span>
+          <span class="tip" aria-hidden="true"><strong>{p.name[locale]}</strong><span>{p.note[locale]}</span></span>
+        </button>
+      );
+    })}
+    {korea && (
+      <button type="button" class="spot spot-korea flip-x flip-y" style={`left: ${korea.left}; top: ${korea.top};`}
+        aria-label={`${koreaLabel}: ${koreans.map(text).join("; ")}`}>
+        <span class="ripple" aria-hidden="true"></span><span class="ripple ripple-late" aria-hidden="true"></span>
+        <span class="lead-diag" aria-hidden="true"></span><span class="lead-flat" aria-hidden="true"></span>
+        <span class="zoom" aria-hidden="true">
+          <span class="zoom-map">
+            <svg viewBox={`0 0 ${Math.round((KOREA.east - KOREA.west) * KOREA.scale)} ${Math.round((KOREA.north - KOREA.south) * KOREA.scale)}`}><path class="land" d={koreaLand} /></svg>
+            {koreans.map((p, index) => <span class="zoom-dot" style={`left: ${zoom(p).left}; top: ${zoom(p).top};`}>{index + 1}</span>)}
+          </span>
+          <ol class="zoom-list">
+            {koreans.map((p, index) => <li><span class="zoom-num">{index + 1}</span><span><strong>{short(p)}</strong><span>{p.note[locale]}</span></span></li>)}
+          </ol>
+        </span>
+      </button>
+    )}
+  </div>
+  <ul class="places">
+    {places.map((p) => <li><span class="place-dot" aria-hidden="true"></span>{text(p)}</li>)}
+  </ul>
+</section>
