@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="Pretendard, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+  <!-- Schematic: the CAMx model runs on a grid over central Korea and tags particulate matter by the region it came from
+       (PSAT), giving each region's share. The bar is illustrative, not a result. -->
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#b9c6d4" stroke-width="1.2"/></pattern>
+    <marker id="head" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3b3f4a"/></marker>
+  </defs>
+  <rect width="800" height="600" fill="#eef2f6"/>
+  <!-- the model grid over the region -->
+  <rect x="20" y="70" width="520" height="420" rx="10" fill="url(#grid)" stroke="#8fa1b5" stroke-width="2"/>
+  <!-- source regions, roughly where they lie: Chungnam west and north-west, Chungbuk north-east, Jeonbuk south -->
+  <g transform="translate(14 64) scale(.66)" stroke-width="4" fill-opacity=".5">
+    <path d="M70 70 Q 200 40 300 90 Q 330 150 280 200 Q 170 215 90 175 Q 50 120 70 70z" fill="#c0392b" stroke="#c0392b"/>
+    <path d="M60 230 Q 170 215 270 240 Q 300 320 250 380 Q 140 400 70 350 Q 40 290 60 230z" fill="#e67e22" stroke="#e67e22"/>
+    <path d="M500 60 Q 650 40 740 110 Q 760 220 690 300 Q 590 320 520 260 Q 470 160 500 60z" fill="#2980b9" stroke="#2980b9"/>
+    <path d="M190 420 Q 360 395 560 420 Q 600 480 540 520 Q 360 545 210 515 Q 160 470 190 420z" fill="#16a085" stroke="#16a085"/>
+    <ellipse cx="410" cy="255" rx="88" ry="66" fill="#8e44ad" stroke="#8e44ad"/>
+    <g fill="#7b241c" fill-opacity="1" stroke="none"><rect x="130" y="120" width="70" height="40"/><path d="M130 120 l18-16v16l18-16v16l18-16v16z"/><rect x="186" y="84" width="10" height="36"/></g>
+  </g>
+  <g font-size="28" font-weight="700">
+    <text x="30" y="56" fill="#922b21">Chungnam</text>
+    <text x="440" y="56" text-anchor="middle" fill="#1f618d">Chungbuk</text>
+    <text x="258" y="400" text-anchor="middle" fill="#0e6655">Jeonbuk</text>
+  </g>
+  <!-- each region's share of the particulate matter -->
+  <path d="M552 280H604" stroke="#3b3f4a" stroke-width="7" stroke-linecap="round" marker-end="url(#head)"/>
+  <g stroke="#ffffff" stroke-width="3" fill-opacity=".85">
+    <rect x="640" y="120" width="100" height="64" fill="#c0392b"/><rect x="640" y="184" width="100" height="64" fill="#e67e22"/>
+    <rect x="640" y="248" width="100" height="64" fill="#8e44ad"/><rect x="640" y="312" width="100" height="64" fill="#2980b9"/>
+    <rect x="640" y="376" width="100" height="64" fill="#16a085"/>
+  </g>
+  <text x="690" y="100" font-size="26" font-weight="700" fill="#1f2a3a" text-anchor="middle">share</text>
+  <text x="690" y="474" font-size="26" font-weight="700" fill="#1f2a3a" text-anchor="middle">PM</text>
+  <!-- the model -->
+  <rect x="120" y="520" width="560" height="58" rx="29" fill="#1f2a3a"/>
+  <text x="400" y="559" font-size="30" font-weight="800" fill="#ffffff" text-anchor="middle">CAMx · PSAT source tagging</text>
+</svg>
