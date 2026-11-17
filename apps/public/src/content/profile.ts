@@ -271,11 +271,61 @@ export const profile: Profile = {
       links: []
     },
     {
+      title: "The Analysis of Summertime Tropospheric Ozone at Anmyeon Using Ozonesonde Measurements in 2021~2022",
+      authors: ["Ja-Ho Koo", "Joowan Kim", "Donghee Lee", "Nahyun Lee", "Dayeong Lee", "Minju Park", "So-Jeong Lee", "Sang Jun Kim", "Hyungyu Kang", "Hyeong-Gyu Kim", "Jinsoo Park", "Won-Jin Lee"],
+      venue: "Journal of Korean Society for Atmospheric Environment",
+      year: 2024,
+      doi: "10.5572/KOSAE.2024.40.3.373",
+      // Korean record from the journal's article page.
+      ko: {
+        title: "오존존데 관측을 활용한 2021~2022년 여름철 안면도 대류권 오존 분석",
+        authors: ["구자호", "김주완", "이동희", "이나현", "이다영", "박민주", "이소정", "김상준", "강현규", "김형규", "박진수", "이원진"],
+        venue: "한국대기환경학회지"
+      },
+      links: []
+    },
+    {
+      title: "Atmospheric pathway of marine heatwaves over the Northwestern Pacific",
+      authors: ["El Noh", "Joowan Kim", "Sang-Yoon Jun", "Gyundo Pak", "Joo-Hong Kim", "Hyeong-Gyu Kim"],
+      venue: "Scientific Reports",
+      year: 2023,
+      doi: "10.1038/s41598-023-49833-4",
+      links: []
+    },
+    {
+      title: "The Observation of Ozone Vertical Profile in Yongin, Korea During the GMAP 2021 Field Campaign",
+      authors: ["Hosun Ryu", "Ja-Ho Koo", "Hyeong-Gyu Kim", "Nahyun Lee", "Won-Jin Lee", "Joowan Kim"],
+      venue: "Atmosphere",
+      year: 2022,
+      doi: "10.14191/Atmos.2022.32.3.247",
+      // Korean record from the journal's article page (KoreaScience).
+      ko: {
+        title: "GMAP 2021 캠페인 기간 용인지역 오존 연직 분포 관측",
+        authors: ["류호선", "구자호", "김형규", "이나현", "이원진", "김주완"],
+        venue: "대기"
+      },
+      links: []
+    },
+    {
       title: "The Role of the Pacific-Japan Pattern in Extreme Heatwaves Over Korea and Japan",
       authors: ["El Noh", "Joowan Kim", "Sang-Yoon Jun", "Dong-Hyun Cha", "Myung-Sook Park", "Joo-Hong Kim", "Hyeong-Gyu Kim"],
       venue: "Geophysical Research Letters",
       year: 2021,
       doi: "10.1029/2021GL093990",
+      links: []
+    },
+    {
+      title: "Effect of Model Domain on Summer Precipitation Predictions over the Korean Peninsula in WRF Model",
+      authors: ["Hyeong-Gyu Kim", "Hye-Young Lee", "Joowan Kim", "Seungwoo Lee", "Kyung On Boo", "Song-Ee Lee"],
+      venue: "Atmosphere",
+      year: 2021,
+      doi: "10.14191/Atmos.2021.31.1.017",
+      // Korean record from the journal's article page (KoreaScience).
+      ko: {
+        title: "WRF 모형에서 한반도 여름철 강수 예측에 모의영역이 미치는 영향",
+        authors: ["김형규", "이혜영", "김주완", "이승우", "부경온", "이송이"],
+        venue: "대기"
+      },
       links: []
     }
   ],
