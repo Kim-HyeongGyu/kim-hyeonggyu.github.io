@@ -245,14 +245,14 @@ export const profile: Profile = {
     {
       title: "Characteristics of Record-Breaking Precipitation in 2023/24 Winter over the Korean Peninsula and Relevant Atmospheric Patterns",
       authors: ["Hyeong-Gyu Kim", "Kanghyun Song", "Junseok Lee", "Joowan Kim", "Baek-Min Kim", "Eun-Chul Chang"],
-      venue: "Atmosphere",
+      venue: "Atmosphere (Korean Meteorological Society)",
       year: 2025,
       doi: "10.14191/ATMOS.2025.35.2.181",
       // Korean record from the journal's article page (KoreaScience).
       ko: {
         title: "기록적인 2023/24년 한반도 겨울 강수 특성 및 대기패턴의 영향",
         authors: ["김형규", "송강현", "이준석", "김주완", "김백민", "장은철"],
-        venue: "대기"
+        venue: "대기 (한국기상학회)"
       },
       links: []
     },
@@ -295,14 +295,14 @@ export const profile: Profile = {
     {
       title: "The Observation of Ozone Vertical Profile in Yongin, Korea During the GMAP 2021 Field Campaign",
       authors: ["Hosun Ryu", "Ja-Ho Koo", "Hyeong-Gyu Kim", "Nahyun Lee", "Won-Jin Lee", "Joowan Kim"],
-      venue: "Atmosphere",
+      venue: "Atmosphere (Korean Meteorological Society)",
       year: 2022,
       doi: "10.14191/Atmos.2022.32.3.247",
       // Korean record from the journal's article page (KoreaScience).
       ko: {
         title: "GMAP 2021 캠페인 기간 용인지역 오존 연직 분포 관측",
         authors: ["류호선", "구자호", "김형규", "이나현", "이원진", "김주완"],
-        venue: "대기"
+        venue: "대기 (한국기상학회)"
       },
       links: []
     },
@@ -317,14 +317,14 @@ export const profile: Profile = {
     {
       title: "Effect of Model Domain on Summer Precipitation Predictions over the Korean Peninsula in WRF Model",
       authors: ["Hyeong-Gyu Kim", "Hye-Young Lee", "Joowan Kim", "Seungwoo Lee", "Kyung On Boo", "Song-Ee Lee"],
-      venue: "Atmosphere",
+      venue: "Atmosphere (Korean Meteorological Society)",
       year: 2021,
       doi: "10.14191/Atmos.2021.31.1.017",
       // Korean record from the journal's article page (KoreaScience).
       ko: {
         title: "WRF 모형에서 한반도 여름철 강수 예측에 모의영역이 미치는 영향",
         authors: ["김형규", "이혜영", "김주완", "이승우", "부경온", "이송이"],
-        venue: "대기"
+        venue: "대기 (한국기상학회)"
       },
       links: []
     }
