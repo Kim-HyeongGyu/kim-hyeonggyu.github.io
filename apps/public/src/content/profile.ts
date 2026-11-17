@@ -229,21 +229,6 @@ export const profile: Profile = {
         en: "Schematic seen from above the South Pole: glacial sea ice spreads beyond the pre-industrial ice edge, and the westerlies around it grow stronger and move closer to the pole",
         ko: "남극 위에서 본 모식도: 빙하기 해빙이 산업화 이전의 해빙 경계보다 넓게 퍼지고, 그 둘레의 편서풍이 강해지며 극 쪽으로 옮겨 간다"
       }
-    },
-    {
-      title: { en: "AI-based icing risk on Jeonbuk expressways", ko: "AI 기반 전북 고속도로 결빙 위험도 분석" },
-      summary: {
-        en: "Estimating road-surface temperature and icing every ten minutes where three Jeonbuk expressways have no road-weather station, and mapping icing risk for every 500 m section — an entry to the 2026 DATA·AI Analysis Competition (KISTI).",
-        ko: "전북 고속도로 3개 노선의 도로기상 미관측 지점에서 노면온도와 결빙을 10분 단위로 추정하고, 500 m 구간별 결빙 위험도 지도를 만듭니다. 2026 DATA·AI 분석 경진대회(KISTI) 참가 과제입니다."
-      },
-      period: { en: "2026", ko: "2026" },
-      kind: "personal",
-      funder: { en: "", ko: "" },
-      image: "ai-weather.svg",
-      imageAlt: {
-        en: "Schematic: road-weather stations stand along an expressway, the road between them is estimated, and each 500 m section is coloured by icing risk from low to high",
-        ko: "모식도: 고속도로를 따라 도로기상 관측소가 있고, 그 사이 미관측 지점을 추정하며, 500 m 구간마다 결빙 위험도를 낮음·보통·높음 색으로 나타낸다"
-      }
     }
   ],
   authorNames: ["Hyeong-Gyu Kim", "김형규"],
